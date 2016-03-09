@@ -26,14 +26,17 @@ class Interpreter:
             t_vals.append(t_.val)
         if not "(" in t_vals:
             return (False, t)
+        if t[0].type == "call" and t[1].val != "(":
+            return (False, t)
         for i, tok in enumerate(t):
-            if tok.type == "call":
+            if "call" in tok.type:
                 try:
+                    
                     if t[i+1].val == "(":
                         u = 0
                         indt = i + 2
-                        while True:
 
+                        while True:
                             if t[indt].val == "(": u += 1
                             if t[indt].val == ")" and u > 0: u -= 1
                             indt += 1
@@ -44,9 +47,14 @@ class Interpreter:
                             return (True, t[indt+1:], t[i+2])
                         else:
                             return (True, t[indt+1:], t[i+2:indt])
+                    else:
+                        t[i].type = "!call"
+
 
                 except IndexError:
                     return (False, [])
+            else:
+                pass
       
     
     def eval(self, code): # Code is string...
@@ -63,11 +71,14 @@ class Interpreter:
 
                     if not args[0]:
                         self.tokens = args[1][1:]
-                        returns.append(args[1][0])
+                        returns.append(tokenz.Token("!call", args[1][0].val))
                     else:
                         self.tokens = args[1]
                         returns.append(methodMang.Call(tok.val, _2list(args[2])).run())
-                        
+                elif tok.type == "!call":
+                    self.crunch()
+                    
+                    returns.append(tok)                  
                 elif tok.type == "numb":
                     self.crunch()
                     
@@ -87,7 +98,7 @@ class Interpreter:
 
                     
 if __name__ == "__main__":
-    print("Scotch Programming Language")
+    print("Scotch Programming Language v1.1")
     print("Created by Daniel (Icely) 2016")
     print("Running Interactive prompt... \n")
     while True:
