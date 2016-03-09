@@ -1,3 +1,4 @@
+#!python3
 import tokenz
 import methodMang
 import time
@@ -16,14 +17,12 @@ class Interpreter:
         return self.tokens.pop(0)
 
     def get_args(self, toks): #Function arg getter, input a list of tokens like... out (123 456) ... and  will return [123, 456]
-        # print("Get_args toks passed: " + str(toks))
+
         t = toks
         t_vals = []
         for t_ in t:
             t_vals.append(t_.val)
-       #  print("t_vals: "+str(t_vals))
         if "(" not in t_vals:
-            # print("Not a func")
             return ("notAfunc", t[1:], t[0])
         self.crunch()
         indt = 0
@@ -45,7 +44,6 @@ class Interpreter:
     
     def eval(self, code): # Code is string...
         self.tokens = tokenz.tokenize(str(code))
-        # print("%s tokenized = %s" %(code, str(self.tokens)))
         self.pos = 0
         returns = []
         while self.tokens != []:
@@ -54,11 +52,10 @@ class Interpreter:
                 if tok.type == "call":
                     
                     args = self.get_args(self.tokens)
-                    # print("args got: %s" % str(args))
+
                     if args[0] == "notAfunc":
                         self.tokens = args[1]
                         returns.append(args[2])
-                        # print("Not a func, appending %s" % str(args[2].val))
                     else:
                         self.tokens = args[1]
                         returns.append(methodMang.Call(tok.val, args[0]).run())
@@ -77,13 +74,13 @@ class Interpreter:
                     returns.append(tok)
             except IndexError:
                 break
-        # print(returns)
+
         return returns
 
                     
 if __name__ == "__main__":
     print("Scotch Programming Language")
-    print("Created by Daniel Sage 2016")
+    print("Created by Daniel (Icely) 2016")
     print("Running Interactive prompt... \n")
     while True:
         try:

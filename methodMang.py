@@ -1,5 +1,7 @@
+#!python3
 from methods import output, data
 import tokenz
+
 import interpreter
 
 intp = interpreter.Interpreter()
@@ -29,10 +31,9 @@ class Call:
                 args2pass = ""
 
                 args2pass = " ".join(self.vals)
-                
-                # print(args2pass)
+
                 args2pass = intp.eval(args2pass)
-                # print(str(args2pass) + " -- " + str(self.method))
+
                 return_val = m[1].funcs[m[0].index(self.method)](args2pass)
                 f = True
                 break
