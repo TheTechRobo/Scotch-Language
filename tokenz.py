@@ -3,7 +3,7 @@ import re
 NUM = re.compile(r"(?:-)?\d+(\.\d+)?")
 STR = re.compile(r"(\".*?\")")
 BOOL = re.compile(r"True|False")
-CALL = re.compile(r"[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&*+,-./:;<=>?@\\^_|~]+")
+CALL = re.compile(r"[0-9a-zA-Z!#$%&*+,./:;<=>?@\\^_|~-]+")
 
 
 class TokenizeErr(Exception): pass
@@ -61,7 +61,7 @@ def tokenize(code):
             name = code[:sp]
             code = code[sp:]
             tokens.append(Token("call", name))
-            
+
         elif code[0] == "(":
             code = code[1:]
 
