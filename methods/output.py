@@ -13,7 +13,7 @@ def out(args): #[Token("num", 5), Token("num", 6)]
             print(str(a.val))
         else:
             raise MethodInputError("Unreconized type to outupt: %s" % a.type)
-        return return tokenz.Token("None", None)
+        return tokenz.Token("None", None)
     
 class Output:
     def __init__(self):
