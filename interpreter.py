@@ -1,10 +1,7 @@
 #!python3
 import tokenz
 import methodMang
-import time
 
-
-time.sleep(3)
 
 class Interpreter:
 
