@@ -1,5 +1,5 @@
 #!python3
-from methods import output, data
+from methods import io, data
 import tokenz
 
 import interpreter
@@ -8,6 +8,8 @@ intp = interpreter.Interpreter()
 
 class UndefinedFunctionError(Exception): pass
 
+def reg(it, c):
+    it.valid = it.valid + [(c().methods, c())]
 
 
 class Call:
@@ -19,9 +21,9 @@ class Call:
         for t in self.a:
             self.vals.append(str(t.val))
         self.valid = []
-        
-        self.valid = self.valid + [(output.Output().methods, output.Output())]
-        self.valid = self.valid + [(data.Data().methods, data.Data())]
+
+        reg(self, io.IO)
+        reg(self, data.Data)
         
         
     def run(self):
