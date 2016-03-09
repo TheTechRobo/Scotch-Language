@@ -1,0 +1,22 @@
+###### PLANS FOR SCOTCH ######
+
+File extention: *.scot
+
+###### SYNTAX ######
+
+	// Data //
+
+	var(name 5)        <-- Sets the variable 'name' to 5
+
+
+	// BOOLS //
+	True     <-- True, duh
+	False    <-- False... duh
+
+
+	// Output //
+
+	out ("string")   <-- This would print the word "string"
+	out (get(name)        <-- This would print the value of the var 'name'
+
+
