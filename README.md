@@ -1,6 +1,7 @@
 # Scotch-Language
 
 [![Join the chat at https://gitter.im/Icelys/Scotch-Language](https://badges.gitter.im/Icelys/Scotch-Language.svg)](https://gitter.im/Icelys/Scotch-Language?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A 100% Function Based Programming Language Written in Python!
 
 To use, run interpreter.py and use the interactive prompt. 
