@@ -15,6 +15,7 @@ class Call:
         self.method = method
         self.a = args
         self.vals = []
+
         for t in self.a:
             self.vals.append(str(t.val))
         self.valid = []
