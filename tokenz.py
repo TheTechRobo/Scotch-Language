@@ -79,7 +79,22 @@ def tokenize(code):
             tokens = tokens + tokenize(code[0:i-1])
             tokens.append(Token("paren-c", ")"))
             code = code[i+1:]
+
+        elif code[0] == "{":
+            code = code[1:]
             
+            ind = 1
+            i = 0
+            for c in code:
+                if ind == 0:
+                    break
+                if c == "{":
+                    ind += 1
+                elif c == "}":
+                    ind -= 1
+                i += 1
+            tokens = tokens + tokenize(code[0:i-1])
+            tokens.append(Token("block-c", "}"))
         
             
         elif code[0] == " ":
