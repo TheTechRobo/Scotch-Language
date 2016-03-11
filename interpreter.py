@@ -8,6 +8,15 @@ def _2list(x):
     else:
         return [x]
 
+def openFile():
+    path = input("Path please: ")
+    f = open(path, 'r')
+    c = ""
+    for line in f:
+        c = c + line + " "
+    print("----")
+    f.close()
+    return c
 
 class Interpreter:
 
@@ -122,7 +131,10 @@ if __name__ == "__main__":
             code = input(">>> ")
             if code == "kill":
                 break
-            Interpreter().eval(code)
+            elif code == "open":
+                Interpreter().eval(openFile())
+            else:
+                Interpreter().eval(code)
         except KeyboardInterrupt:
             pass
         except Exception as e:
