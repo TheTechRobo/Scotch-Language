@@ -19,14 +19,14 @@ out(False)
 Data:
 ```
 var(variable "something") // Sets var 'variable' to "something"
-get(variable) // Returns the value of var 'variable'
+variable // Returns the value of var 'variable'
 ```
 Combo:
 ```
 var(hello "Hello,")
 var(world "world")
-out(get(hello))
-out(get(world))
+out(hello)
+out(world)
 ```
 will print
 ```
