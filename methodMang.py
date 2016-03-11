@@ -13,10 +13,11 @@ def reg(it, c):
 
 
 class Call:
-    def __init__(self, method, args, doEval=True):
+    def __init__(self, method, args, allowBan, doEval=True):
         self.method = method
         self.a = args
         self.de = doEval
+        self.ab = allowBan
         self.vals = []
 
         for t in self.a:
@@ -33,7 +34,7 @@ class Call:
         f = False
         for m in self.valid:
             if self.method in m[0]:
-                if self.method in m[1].banned:
+                if self.method in m[1].banned and not self.ab:
                     f = False
                     break
                 if self.de:

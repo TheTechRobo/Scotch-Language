@@ -77,11 +77,11 @@ class Interpreter:
                         that = tokenz.Token("ident", args[1][0].val)
                         that.id = args[1][0].val
 
-                        this = tokenz.Token("value", methodMang.Call("get", [that], False).run().val)
+                        this = tokenz.Token("value", methodMang.Call("get", [that], True, False).run().val)
                         returns.append(this)
                     else:
                         self.tokens = args[1]
-                        returns.append(methodMang.Call(tok.val, _2list(args[2])).run())
+                        returns.append(methodMang.Call(tok.val, _2list(args[2]), False).run())
                 elif tok.type == "codeblock":
                     self.crunch()
                     
