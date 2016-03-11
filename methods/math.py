@@ -6,7 +6,10 @@ class VariableError(Exception): pass
 
 def all_type(toks, t):
     for tok in toks:
-        if tok.type != t:
+        if tok.type == "value":
+            if type(tok.val) != int:
+                return False
+        elif tok.type != t:
             return False
     return True
 
@@ -56,4 +59,5 @@ def power(args):
 class Math:
     def __init__(self):
         self.methods = ["add", "sub", "mul", "div", "pow"]
+        self.banned = []
         self.funcs = [add, sub, mul, div, power]

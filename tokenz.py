@@ -3,7 +3,7 @@ import re
 NUM = re.compile(r"(?:-)?\d+(\.\d+)?")
 STR = re.compile(r"(\".*?\")")
 BOOL = re.compile(r"True|False")
-CALL = re.compile(r"[0-9a-zA-Z!#$%&*+,./:;<=>?@\\^_|~-]+")
+CALL = re.compile(r"[0-9a-zA-Z!#$%&*+,./:;<>?@\\^_|~-]+")
 
 
 class TokenizeErr(Exception): pass
@@ -79,8 +79,21 @@ def tokenize(code):
             tokens = tokens + tokenize(code[0:i-1])
             tokens.append(Token("paren-c", ")"))
             code = code[i+1:]
+
+        elif code[0] == "{":
+            ind = 1
+            i = 1
+            for c in code:
+                if ind == 0:
+                    break
+                if c == "{":
+                    ind += 1
+                elif c == "}":
+                    ind -= 1
+                i += 1
+            tokens.append(Token("codeblock", code[0:i]))
+            code = code[i+1:]
             
-        
             
         elif code[0] == " ":
             code = code[1:]
@@ -89,9 +102,15 @@ def tokenize(code):
         
     return tokens
 
+def detokenize(tokens):
+    vals = []
+    for tok in tokens:
+        vals.append(str(tok.val))
+    return " ".join(vals)
+
 if __name__ == "__main__":
         while True:
                 c = input("Code: ")
                 for t in tokenize(c):
-                        print(t.val)
+                        print(t)
                       

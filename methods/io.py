@@ -10,7 +10,7 @@ def out(args): #[Token("num", 5), Token("num", 6)]
     
     if a.type == "str":
         print(a.val[1:-1])
-    elif a.type in "numbbool":
+    elif a.type in ["numb", "bool", "value"]:
         print(str(a.val))
     else:
         raise MethodInputError("Unreconized type to outupt: %s" % a.type)
@@ -27,6 +27,7 @@ def ask(args):
 class IO:
     def __init__(self):
         self.methods = ["out", "ask"]
+        self.banned = []
         self.funcs = [out, ask]
     
 
