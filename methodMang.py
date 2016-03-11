@@ -13,9 +13,10 @@ def reg(it, c):
 
 
 class Call:
-    def __init__(self, method, args):
+    def __init__(self, method, args, doEval=True):
         self.method = method
         self.a = args
+        self.de = doEval
         self.vals = []
 
         for t in self.a:
@@ -32,11 +33,23 @@ class Call:
         f = False
         for m in self.valid:
             if self.method in m[0]:
-                args2pass = ""
-
-                args2pass = " ".join(self.vals)
-
-                args2pass = intp.eval(args2pass)
+                if self.method in m[1].banned:
+                    f = False
+                    break
+                if self.de:
+                    if self.method != "var":
+                        args2pass = ""
+                        args2pass = " ".join(self.vals)
+                        args2pass = intp.eval(args2pass)
+                    else:
+                        args2pass = ""
+                        args2pass = " ".join(self.vals)
+                        a = tokenz.tokenize(args2pass)
+                        args2pass = intp.eval(tokenz.detokenize(a[1:]))
+                        a[0].type = "ident"
+                        args2pass = [a[0]] + args2pass
+                else:
+                    args2pass = self.a
 
                 return_val = m[1].funcs[m[0].index(self.method)](args2pass)
                 f = True

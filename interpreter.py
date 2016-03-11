@@ -24,7 +24,7 @@ class Interpreter:
         t_vals = []
         for t_ in t:
             t_vals.append(t_.val)
-        if not "(" in t_vals:
+        if not "(" in t_vals or len(toks) == 1:
             return (False, t)
         if t[0].type == "call" and t[1].val != "(":
             return (False, t)
@@ -58,6 +58,7 @@ class Interpreter:
       
     
     def eval(self, code): # Code is string...
+
         self.tokens = tokenz.tokenize(str(code))
         self.pos = 0
         returns = []
@@ -65,17 +66,27 @@ class Interpreter:
 
             try:
                 tok = self.tokens[0]
+
                 if tok.type == "call":
                     
                     args = self.func(self.tokens) # [isFunction, resulting token stream, arguments]
 
                     if not args[0]:
                         self.tokens = args[1][1:]
-                        returns.append(tokenz.Token("!call", args[1][0].val))
+
+                        that = tokenz.Token("ident", args[1][0].val)
+                        that.id = args[1][0].val
+
+                        this = tokenz.Token("value", methodMang.Call("get", [that], False).run().val)
+                        returns.append(this)
                     else:
                         self.tokens = args[1]
                         returns.append(methodMang.Call(tok.val, _2list(args[2])).run())
-                elif tok.type == "!call":
+                elif tok.type == "codeblock":
+                    self.crunch()
+                    
+                    returns.append(tok)
+                elif tok.type == "ident":
                     self.crunch()
                     
                     returns.append(tok)                  
@@ -91,10 +102,15 @@ class Interpreter:
                     self.crunch()
                     
                     returns.append(tok)
+                
             except IndexError:
                 break
 
         return returns
+
+    def call(self, codeblock):
+        code = codeblock.val[1:-1]
+        return self.eval(code)
 
                     
 if __name__ == "__main__":
