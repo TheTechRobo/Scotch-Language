@@ -4,7 +4,7 @@ out("test...")
 out(123)
 out(True)
 out("//n")
-
+out(True)
 var(test "varTest")
 out(test)
 
@@ -16,10 +16,20 @@ out(test)
 
 out(add(1 2))
 
-out(concat("a" "b" "c"))
+out(concat("p" "a" "s" "s"))
 
-def(*sayhello {out("Hello! func test")})
+def(*sayhello {out("Func Pass")})
 call(*sayhello)
+
+if(True {out("Pass")})
+if(!(True) {out("Pass")})
+if(bool("True") {out("Pass")})
+if(!(bool("False")) {out("Pass")})
+ifelse(bool("True") {out("Pass")} {out("Fail")})
+
+var(i 0)
+def(*incr {var(i add(i 1))})
+repeat(5 {call(*incr) out(concat("Itter " i))})
 
 ask("Press enter to finish")
 out("Test done.")

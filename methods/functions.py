@@ -9,12 +9,12 @@ def define(args):
     elif args[0].type == "func" and args[1].type == "codeblock":
         funcs[str(args[0].val)] = args[1]
     else:
-        raise MethodInputError("Incorrect type of arguments for function: %s" % (str(args[0].type), str(args[1].type)))
+        raise MethodInputError("Incorrect type of arguments for function: %s, %s" % (str(args[0].type), str(args[1].type)))
     return tokenz.Token("None", None)
 
 def call(args):
     if len(args) != 1: raise MethodInputError("Incorrect number of inputs, should be 1, %s were given" % len(args))
-    elif args[0].type == "func":
+    elif args[0].type == "func" or args[0].type == "value":
         interpreter.Interpreter().call(funcs[str(args[0].val)])
     else:
         raise MethodInputError("Incorrect type of arguments for function: %s" % str(args[0].type))

@@ -1,5 +1,5 @@
 #!python3
-from methods import io, data, math, strings, functions
+from methods import io, data, math, types, functions, control
 import tokenz
 
 import interpreter
@@ -27,12 +27,12 @@ class Call:
         reg(self, io.IO)
         reg(self, data.Data)
         reg(self, math.Math)
-        reg(self, strings.Strings)
+        reg(self, types.Types)
         reg(self, functions.Functions)
+        reg(self, control.Control)
         
         
     def run(self):
-
         f = False
         for m in self.valid:
             if self.method in m[0]:

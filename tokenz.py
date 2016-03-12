@@ -99,7 +99,7 @@ def tokenize(code):
         elif code[0] == "{":
             ind = 1
             i = 1
-            for c in code:
+            for c in code[1:]:
                 if ind == 0:
                     break
                 if c == "{":
@@ -108,8 +108,7 @@ def tokenize(code):
                     ind -= 1
                 i += 1
             tokens.append(Token("codeblock", code[0:i]))
-            code = code[i+1:]
-            
+            code = code[i:]    
             
         elif code[0] == " ":
             code = code[1:]

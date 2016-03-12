@@ -70,15 +70,12 @@ class Interpreter:
       
     
     def eval(self, code): # Code is string...
-
         self.tokens = tokenz.tokenize(str(code))
         self.pos = 0
         returns = []
         while self.tokens != []:
-
             try:
                 tok = self.tokens[0]
-
                 if tok.type == "call":
                     
                     args = self.func(self.tokens) # [isFunction, resulting token stream, arguments]
@@ -91,9 +88,9 @@ class Interpreter:
 
                         this = tokenz.Token("value", methodMang.Call("get", [that], True, False).run().val)
                         returns.append(this)
-                    else:
-                        self.tokens = args[1]
+                    else: 
                         returns.append(methodMang.Call(tok.val, _2list(args[2]), False).run())
+                        self.tokens = args[1]
                 elif tok.type == "codeblock":
                     self.crunch()
                     
@@ -118,10 +115,13 @@ class Interpreter:
                     self.crunch()
                     
                     returns.append(tok)
+                elif tok.type == "codeblock":
+                    self.crunch()
+                    
+                    returns.append(tok)
                 
             except IndexError:
                 break
-
         return returns
 
     def call(self, codeblock):
@@ -130,7 +130,7 @@ class Interpreter:
 
                     
 if __name__ == "__main__":
-    print("Scotch Programming Language v0.1.5")
+    print("Scotch Programming Language v0.1.7")
     print("Created by Daniel (Icely) 2016")
     print("Running Interactive prompt... \n")
     while True:
