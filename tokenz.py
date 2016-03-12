@@ -19,7 +19,15 @@ class Token:
             return "[ " + ' '.join(map(str, self.val)) + " ]"
         return repr(str(self.val) + "." + str(self.type))
 
-
+def stringify(t):
+    return "\"" + str(t) + "\""
+def destringify(t):
+    if t.type == "str":
+        return t.val[1:-1]
+    elif t.type == "value":
+        return destringify(tokenize(t.val)[0])
+    else:
+        return t.val
 def tokenize(code):
 
     tokens = []

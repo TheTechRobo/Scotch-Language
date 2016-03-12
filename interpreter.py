@@ -8,6 +8,18 @@ def _2list(x):
     else:
         return [x]
 
+def openFile():
+    path = input("Path please: ")
+    f = open(path, 'r')
+    c = []
+    for line in f:
+        c.append(line)
+    for i, l in enumerate(c):
+        c[i] = l.replace("\n", "")
+    c = " ".join(c)
+    print("----")
+    f.close()
+    return c
 
 class Interpreter:
 
@@ -114,7 +126,7 @@ class Interpreter:
 
                     
 if __name__ == "__main__":
-    print("Scotch Programming Language v0.1.3")
+    print("Scotch Programming Language v0.1.4")
     print("Created by Daniel (Icely) 2016")
     print("Running Interactive prompt... \n")
     while True:
@@ -122,11 +134,13 @@ if __name__ == "__main__":
             code = input(">>> ")
             if code == "kill":
                 break
-            Interpreter().eval(code)
+            elif code == "open":
+                Interpreter().eval(openFile())
+            else:
+                Interpreter().eval(code)
         except KeyboardInterrupt:
             pass
         except Exception as e:
             print("ERROR: %s; %s" % (e.__class__.__name__, str(e)))
-            if input("Raise? (Y/n) ") in "Yy": raise e
-            
+            if input("Raise? (Y/n) ") in "Yy": raise e            
         
