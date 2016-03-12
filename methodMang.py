@@ -1,5 +1,5 @@
 #!python3
-from methods import io, data, math
+from methods import io, data, math, strings
 import tokenz
 
 import interpreter
@@ -27,6 +27,7 @@ class Call:
         reg(self, io.IO)
         reg(self, data.Data)
         reg(self, math.Math)
+        reg(self, strings.Strings)
         
         
     def run(self):
@@ -45,13 +46,12 @@ class Call:
                     else:
                         args2pass = ""
                         args2pass = " ".join(self.vals)
-                        a = tokenz.tokenize(args2pass)
+                        a = tokenz.tokenize(args2pass)       
                         args2pass = intp.eval(tokenz.detokenize(a[1:]))
                         a[0].type = "ident"
                         args2pass = [a[0]] + args2pass
                 else:
                     args2pass = self.a
-
                 return_val = m[1].funcs[m[0].index(self.method)](args2pass)
                 f = True
                 break
