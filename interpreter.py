@@ -114,6 +114,10 @@ class Interpreter:
                     self.crunch()
                     
                     returns.append(tok)
+                elif tok.type == "func":
+                    self.crunch()
+                    
+                    returns.append(tok)
                 
             except IndexError:
                 break
@@ -126,7 +130,7 @@ class Interpreter:
 
                     
 if __name__ == "__main__":
-    print("Scotch Programming Language v0.1.4")
+    print("Scotch Programming Language v0.1.5")
     print("Created by Daniel (Icely) 2016")
     print("Running Interactive prompt... \n")
     while True:

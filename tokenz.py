@@ -3,7 +3,8 @@ import re
 NUM = re.compile(r"(?:-)?\d+(\.\d+)?")
 STR = re.compile(r"(\".*?\")")
 BOOL = re.compile(r"True|False")
-CALL = re.compile(r"[0-9a-zA-Z!#$%&*+,./:;<>?@\\^_|~-]+")
+CALL = re.compile(r"[0-9a-zA-Z!#$%&+,./:;<>?@\\^_|~-]+")
+FUNC = re.compile(r"\*[a-zA-Z!#$%&+,./:;<>?@\\^_|~-]+")
 
 
 class TokenizeErr(Exception): pass
@@ -37,6 +38,7 @@ def tokenize(code):
         strm = STR.match(code)
         boolm = BOOL.match(code)
         callm = CALL.match(code)
+        funcm = FUNC.match(code)
 
         if numm:
             sp = numm.span()[1]
@@ -69,6 +71,12 @@ def tokenize(code):
             name = code[:sp]
             code = code[sp:]
             tokens.append(Token("call", name))
+
+        elif funcm:
+            sp = funcm.span()[1]
+            name = code[:sp]
+            code = code[sp:]
+            tokens.append(Token("func", name))
 
         elif code[0] == "(":
             code = code[1:]

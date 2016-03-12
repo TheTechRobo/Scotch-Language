@@ -17,5 +17,9 @@ out(test)
 out(add(1 2))
 
 out(concat("a" "b" "c"))
+
+def(*sayhello {out("Hello! func test")})
+call(*sayhello)
+
 ask("Press enter to finish")
 out("Test done.")
