@@ -1,0 +1,21 @@
+out("Running tests...")
+
+out("test...")
+out(123)
+out(True)
+out("//n")
+
+var(test "varTest")
+out(test)
+
+var(test 456)
+out(test)
+
+var(test False)
+out(test)
+
+out(add(1 2))
+
+out(concat("a" "b" "c"))
+ask("Press enter to finish")
+out("Test done.")
