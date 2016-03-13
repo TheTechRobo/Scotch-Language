@@ -1,0 +1,11 @@
+var(targ numb(ask("What number?")))
+var(total 1)
+
+def(*inc {
+var(targ sub(targ 1))
+})
+repeat(targ {
+var(total mul(total targ))
+call(*inc)
+})
+out(concat("Result: " str(total)))
