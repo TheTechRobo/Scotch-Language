@@ -2,7 +2,18 @@ import tokenz, interpreter
 
 class MethodInputError(Exception): pass
 
+def valueify(args):
+    x = []
+    for t in args:
+        if t.type == "value":
+            y = tokenz.tokenize(t.val)[0]
+            x.append(y)
+        else:
+            x.append(t)
+    return x
+
 def ifstm(args):
+    args = valueify(args)
     if len(args) != 2: raise MethodInputError("Incorrect number of inputs, should be 2, %s were given" % len(args))
     elif args[0].type == "bool" and args[1].type == "codeblock":
         if args[0].val:
@@ -12,6 +23,7 @@ def ifstm(args):
     return tokenz.Token("None", None)
 
 def ifelse(args):
+    args = valueify(args)
     if len(args) != 3: raise MethodInputError("Incorrect number of inputs, should be 3, %s were given" % len(args))
     elif args[0].type == "bool" and args[1].type == "codeblock":
         if args[0].val:
@@ -23,6 +35,7 @@ def ifelse(args):
     return tokenz.Token("None", None)
 
 def rep(args):
+    args = valueify(args)
     if len(args) != 2: raise MethodInputError("Incorrect number of inputs, should be 2, %s were given" % len(args))
     elif args[0].type == "numb" and args[1].type == "codeblock":
         for n in range(args[0].val):

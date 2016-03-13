@@ -42,9 +42,10 @@ def toInt(args):
         return args[0]
     else:
         try:
+            if args[0].type == "str": args[0].val = args[0].val[1:-1]
             return tokenz.Token("numb", int(args[0].val))
         except ValueError:
-            raise ConversionError("Attempted to convet %s type to numb" % str(args[0].type))
+            raise ConversionError("Attempted to convet %s type to numb" % str(args[0].val))
 
 def toBool(args):
     if len(args) != 1: raise MethodInputError("Incorrect number of inputs, should be 1, %s were given" % len(args))

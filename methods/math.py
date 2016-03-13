@@ -26,7 +26,7 @@ def sub(args):
     if len(args) < 2: raise MethodInputError("Incorrect number of inputs, should be at least 2, %s were given" % len(args))
     elif not all_type(args, "numb"): raise MethodInputError("Incorrect type of arguments for function, should be all NUMB")
     else:
-        total = args[0]
+        total = args[0].val
         for tok in args[1:]:
             total = total - tok.val
         return tokenz.Token("numb", total)
@@ -44,7 +44,7 @@ def div(args):
     if len(args) < 2: raise MethodInputError("Incorrect number of inputs, should be at least 2, %s were given" % len(args))
     elif not all_type(args, "numb"): raise MethodInputError("Incorrect type of arguments for function, should be all NUMB")
     else:
-        total = args[0]
+        total = args[0].val
         for tok in args[1:]:
             total = total / tok.val
         return tokenz.Token("numb", total)

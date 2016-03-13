@@ -39,7 +39,7 @@ def tokenize(code):
         boolm = BOOL.match(code)
         callm = CALL.match(code)
         funcm = FUNC.match(code)
-
+        
         if numm:
             sp = numm.span()[1]
             

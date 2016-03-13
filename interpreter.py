@@ -130,7 +130,7 @@ class Interpreter:
 
                     
 if __name__ == "__main__":
-    print("Scotch Programming Language v0.1.7")
+    print("Scotch Programming Language v0.1.8")
     print("Created by Daniel (Icely) 2016")
     print("Running Interactive prompt... \n")
     while True:
