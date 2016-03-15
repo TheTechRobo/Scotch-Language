@@ -6,8 +6,6 @@ A 100% Function Based Programming Language Written in Python!
 
 To use, run interpreter.py and use the interactive prompt. 
 
-Currently, there are only a few functions. However, I will add more as time progresses. 
-
 Here are some examples:
 
 Printing:
