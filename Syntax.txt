@@ -31,5 +31,8 @@ File extention: *.scot
 	setting a var: var(varName 5)
 	Using the var:
 	out(varName)
+	
+	def(*sayhi {out("Hello!")})
+	call(*sayhi)
 
 
