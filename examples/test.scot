@@ -18,25 +18,25 @@ out(add(1 2))
 
 out(concat("p" "a" "s" "s"))
 
-def(*sayhello {out("Func Pass")})
-*sayhello()
+def(@sayhello {out("Func Pass")})
+if(True {@sayhello()})
+out("READY")
+def(@pass {out("Pass")})
 
-def(*pass {out("Pass")})
+if(True {@pass()})
 
-if(True {*pass()})
+if(!(True) {@pass()})
+if(bool("True") {@pass()})
+if(!(bool("False")) {@pass()})
 
-if(!(True) {*pass()})
-if(bool("True") {*pass()})
-if(!(bool("False")) {*pass()})
-
-ifelse(bool("True") {*pass()} {out("Fail")})
-if(or(True False) {*pass()})
-if(and(True True) {*pass()})
-if(!(and(False True)) {*pass()})
+ifelse(bool("True") {@pass()} {out("Fail")})
+if(or(True False) {@pass()})
+if(and(True True) {@pass()})
+if(!(and(False True)) {@pass()})
 
 var(i 0)
-def(*incr {var(i add(i 1))})
-repeat(5 {*incr() out(concat("Itter " i))})
+def(@incr {var(i add(i 1))})
+repeat(5 {@incr() out(concat("Itter " i))})
 
 ask("Press enter to finish")
 out("Test done.")

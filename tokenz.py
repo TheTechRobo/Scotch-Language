@@ -3,8 +3,8 @@ import re
 NUM = re.compile(r"(?:-)?\d+(\.\d+)?")
 STR = re.compile(r"(\".*?\")")
 BOOL = re.compile(r"True|False")
-CALL = re.compile(r"[0-9a-zA-Z!#$%&+,./:;<>?@\\^_|~-]+")
-FUNC = re.compile(r"\*[a-zA-Z!#$%&+,./:;<>?@\\^_|~-]+")
+CALL = re.compile(r"[0-9a-zA-Z!#$%&+,./:;<>?\*\\^_|~-]+")
+FUNC = re.compile(r"\@[a-zA-Z!#$%&+,./:;<>?\*\\^_|~-]+")
 
 
 class TokenizeErr(Exception): pass
