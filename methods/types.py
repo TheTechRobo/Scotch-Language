@@ -64,18 +64,10 @@ def toBool(args):
         else:
             val = False
         return tokenz.Token("bool", val)
-
-
-def bNot(args):
-    if len(args) != 1: raise MethodInputError("Incorrect number of inputs, should be 1, %s were given" % len(args))
-    if args[0].type == "bool":
-        return tokenz.Token("bool", not args[0].val)
-    else:
-        raise MethodInputError("Incorrect type of arguments for function: %s" % str(args[0].type))
   
 
 class Types:
     def __init__(self):
-        self.methods = ["concat", "upper", "lower", "str", "numb", "bool", "!"]
+        self.methods = ["concat", "upper", "lower", "str", "numb", "bool"]
         self.banned = []
-        self.funcs = [concat, upper, lower, toString, toInt, toBool, bNot]
+        self.funcs = [concat, upper, lower, toString, toInt, toBool]

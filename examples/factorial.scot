@@ -1,11 +1,21 @@
-var(targ numb(ask("What number?")))
-var(total 1)
-
 def(*inc {
-var(targ sub(targ 1))
+	var(targ sub(targ 1))
 })
-repeat(targ {
-var(total mul(total targ))
-call(*inc)
+
+def (*ask {
+	var(targ numb(ask("What number?")))
+	var(total 1)
+
+	ifelse(greater(1 targ) {
+		out("Invalid num")
+		*ask()
+	} {
+		repeat(targ {
+			var(total mul(total targ))
+			*inc()
+		})
+		out(concat("Result: " str(total)))
+	})
 })
-out(concat("Result: " str(total)))
+
+*ask()

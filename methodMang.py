@@ -1,5 +1,5 @@
 #!python3
-from methods import io, data, math, types, functions, control
+from methods import io, data, math, types, functions, control, logic
 import tokenz
 
 import interpreter
@@ -30,6 +30,7 @@ class Call:
         reg(self, types.Types)
         reg(self, functions.Functions)
         reg(self, control.Control)
+        reg(self, logic.Logic)
         
         
     def run(self):

@@ -15,7 +15,8 @@ def openFile():
     for line in f:
         c.append(line)
     for i, l in enumerate(c):
-        c[i] = l.replace("\n", "")
+        x = l.replace("\n", "")
+        c[i] = x.replace("\t", "")
     c = " ".join(c)
     print("----")
     f.close()
@@ -91,6 +92,7 @@ class Interpreter:
                     else: 
                         returns.append(methodMang.Call(tok.val, _2list(args[2]), False).run())
                         self.tokens = args[1]
+                    
                 elif tok.type == "codeblock":
                     self.crunch()
                     
@@ -112,9 +114,29 @@ class Interpreter:
                     
                     returns.append(tok)
                 elif tok.type == "func":
-                    self.crunch()
                     
+                    if len(self.tokens) > 2:
+                        if self.tokens[1].val == "(":
+                            i = 1
+                            d = 1
+                            while True:
+                                i+= 1
+                                if self.tokens[i].val == "(":
+                                    d += 1
+                                elif self.tokens[i].val == ")":
+                                    d -= 1
+                                    if d == 0:
+                                        break
+                            that = self.tokens[1:i+1]
+                            that[0] = tok
+                            that.pop()  # Get rid of )
+                            methodMang.Call("call", that, True, False).run()
+                            self.tokens = self.tokens[i+2:]
+                            returns.append(tokenz.Token("None", None))
+                    
+                    self.crunch()
                     returns.append(tok)
+
                 elif tok.type == "codeblock":
                     self.crunch()
                     
@@ -130,7 +152,7 @@ class Interpreter:
 
                     
 if __name__ == "__main__":
-    print("Scotch Programming Language v0.1.8")
+    print("Scotch Programming Language v0.1.9")
     print("Created by Daniel (Icely) 2016")
     print("Running Interactive prompt... \n")
     while True:
