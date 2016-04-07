@@ -1,4 +1,4 @@
 def(*t {out("its true!")})
 def(*f {out("its false!")})
 
-ifelse(!(False) {call(*t)} {call(*f)})
+ifelse(!(False) {@t()} {@f()})
