@@ -34,3 +34,7 @@ world
 
 Have fun, and if you find a bug, please create an issue! 
 
+# Thanks to these websites
+- https://www.tutorialspoint.com/python/python_command_line_arguments.htm
+- https://stackoverflow.com/a/56844663/9654083
+
