@@ -23,7 +23,8 @@ class Call:
         for t in self.a:
             self.vals.append(str(t.val))
         self.valid = []
-
+        from importlib import reload
+        reload(functions)
         reg(self, io.IO)
         reg(self, data.Data)
         reg(self, math.Math)

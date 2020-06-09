@@ -1,6 +1,7 @@
 #!python3
 import tokenz
 import methodMang
+import sys  
 
 def _2list(x):
     if type(x) == list:
@@ -150,7 +151,28 @@ class Interpreter:
         code = codeblock.val[1:-1]
         return self.eval(code)
 
-                    
+if len(sys.argv) > 1:
+    with open(sys.argv[1], "r") as openedFile:
+        print("Scotch Programming Language v0.1.9")
+        print("Created by Daniel (Icely) 2016\n")
+        for line in openedFile:
+            from importlib import reload
+            reload(methodMang)
+            if "#!" in line:
+                continue
+            try: 
+                code = line
+                if code == "kill":
+                    print("Program killed")
+                    break
+                else:
+                    Interpreter().eval(code)
+            except KeyboardInterrupt:
+                pass
+            except Exception as e:
+                print("ERROR: %s; %s" % (e.__class__.__name__, str(e)))
+                if input("Raise? (Y/n) ") in "Yy": raise e
+            sys.exit("Execution completed")
 if __name__ == "__main__":
     print("Scotch Programming Language v0.1.9")
     print("Created by Daniel (Icely) 2016")
