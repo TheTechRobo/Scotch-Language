@@ -9,8 +9,11 @@ def _2list(x):
     else:
         return [x]
 
-def openFile():
-    path = input("Path please: ")
+def openFile(path=""):
+    from importlib import reload
+    reload(methodMang)
+    if path == "":
+        path = input("Path please: ")
     f = open(path, 'r')
     c = []
     for line in f:
@@ -152,27 +155,13 @@ class Interpreter:
         return self.eval(code)
 
 if len(sys.argv) > 1:
-    with open(sys.argv[1], "r") as openedFile:
-        print("Scotch Programming Language v0.1.9")
-        print("Created by Daniel (Icely) 2016\n")
-        for line in openedFile:
-            from importlib import reload
-            reload(methodMang)
-            if "#!" in line:
-                continue
-            try: 
-                code = line
-                if code == "kill":
-                    print("Program killed")
-                    break
-                else:
-                    Interpreter().eval(code)
-            except KeyboardInterrupt:
-                pass
-            except Exception as e:
-                print("ERROR: %s; %s" % (e.__class__.__name__, str(e)))
-                if input("Raise? (Y/n) ") in "Yy": raise e
-            sys.exit("Execution completed")
+    try:
+        Interpreter().eval(openFile(sys.argv[1]))
+    except Exception as e:
+        print("ERROR: %s; %s" % (e.__class__.__name__, str(e)))
+        if "y" in input("Raise? (Y/n) ").lower(): raise e
+    sys.exit(0)
+
 if __name__ == "__main__":
     print("Scotch Programming Language v0.1.9")
     print("Created by Daniel (Icely) 2016")
@@ -190,4 +179,4 @@ if __name__ == "__main__":
             pass
         except Exception as e:
             print("ERROR: %s; %s" % (e.__class__.__name__, str(e)))
-            if input("Raise? (Y/n) ") in "Yy": raise e            
+            if "y" in input("Raise? (Y/n) ").lower(): raise e            
